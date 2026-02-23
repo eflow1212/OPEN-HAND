@@ -8,23 +8,21 @@ let currentScreen = "title";
 let font;
 let showInstructions = false;
 
-
 function preload() {
   font = loadFont('https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-light-webfont.ttf');
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  frameRate(30);
   r = height / 2 - 16;
   
   textFont(font);
   textAlign(CENTER, CENTER);
   
-  
   video = createCapture(VIDEO);
   video.size(width, height);
   video.hide();
-  
   
   handpose = ml5.handpose(video, modelReady);
   
@@ -67,22 +65,22 @@ function drawTitleScreen() {
   push();
   noStroke();
   fill(255);
-  textSize(windowWidth * 0.08); // Responsive text size
-  text("EXPERIENCE", width/2, height/2 - 80);
+  textSize(windowWidth * 0.08);
+  text("OPEN HAND", width/2, height/2 - 80);
   pop();
   
   push();
   fill(255);
   textSize(windowWidth * 0.02);
-  text("click anywhere to begin", width/2, height/2);
+  text("click anywhere to begin", width/2, height/2 + 80);
   pop();
 }
 
 function drawExperienceScreen() {
   background(0, 20); 
   
-  const total = 200;
-  factor += 0.015; 
+  const total = 100;
+  factor += 0.01; 
   
   translate(width/2, height/2);
   
@@ -95,7 +93,6 @@ function drawExperienceScreen() {
       
       let handX = indexFinger[0] - width/2;
       let handY = indexFinger[1] - height/2;
-      
       
       let handOpenness = dist(indexFinger[0], indexFinger[1], palmBase[0], palmBase[1]);
       
@@ -180,8 +177,6 @@ function drawInstructionsPanel() {
   let textX = panelX + 20;
   let textY = panelY + 80;
   
-  fill(255);
-  
   let bulletPoints = [
     "Index finger position rotates the pattern",
     "Palm-to-index distance controls pattern size",
@@ -193,7 +188,6 @@ function drawInstructionsPanel() {
   for (let i = 0; i < bulletPoints.length; i++) {
     fill(0, 255, 255);
     rect(textX, textY + i*lineHeight + 6, 6, 6);
-    
     fill(255);
     text(bulletPoints[i], textX + 16, textY + i*lineHeight + 8);
   }
