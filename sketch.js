@@ -64,15 +64,12 @@ function drawTitleScreen() {
   
   push();
   noStroke();
-  fill(255);
-  textSize(windowWidth * 0.08);
-  text("OPEN HAND", width/2, height/2 - 80);
-  pop();
+  fill(255, 200);
+  textSize(width / 20);
+  text("OPEN-HAND", width/2, height/2 - 100);
   
-  push();
-  fill(255);
-  textSize(windowWidth * 0.02);
-  text("click anywhere to begin", width/2, height/2 + 80);
+  textSize(width / 60);
+  text("Click to Start", width/2, height/2);
   pop();
 }
 
